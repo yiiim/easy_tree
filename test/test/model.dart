@@ -7,7 +7,7 @@ import 'widget.dart';
 
 class TestEasyTreeModel {
   static const testElementAnyKey = EasyTreeNodeKey(TestElement);
-  TestEasyTreeModel(this.key, {this.parent, this.children}) : _appendKeyIndex = children?.length ?? 1;
+  TestEasyTreeModel(this.key, {this.parent, this.children, this.globalKey}) : _appendKeyIndex = children?.length ?? 1;
   final String key;
   final Color color = Color.fromARGB(255, Random().nextInt(155) + 100, Random().nextInt(155) + 100, Random().nextInt(155) + 100);
   final TestEasyTreeModel? parent;
@@ -15,6 +15,7 @@ class TestEasyTreeModel {
   List<TestEasyTreeModel>? children;
   List<TestEasyTreeModel> mountSortChildren = [];
   List<TestEasyTreeModel> mountSortAllChildren = [];
+  GlobalKey? globalKey;
   void appendSortAllChildren(TestEasyTreeModel item) {
     mountSortAllChildren.add(item);
     parent?.appendSortAllChildren(item);
@@ -46,7 +47,7 @@ class TestEasyTreeModel {
         leftElementNumber -= childChildNum[i];
       }
     }
-    var m = TestEasyTreeModel(key, parent: parent);
+    var m = TestEasyTreeModel(key, parent: parent, globalKey: Random().nextInt(10) == 1 ? GlobalKey(debugLabel: key) : null);
     m.children = List.generate(
       childNum,
       (index) => TestEasyTreeModel.randomGenerate(
@@ -108,7 +109,7 @@ class TestEasyTreeModel {
     assert(element?.num == this);
     assert(element?.easyTreeHostElement == element);
     assert(element?.easyTreeParent == parent?.element || element?.easyTreeParent == EasyTreeOwner.sharedOwner);
-    assert((element?.widget.key as ValueKey).value == key);
+    // assert((element?.widget.key as ValueKey).value == key);
     assert((children ?? <TestEasyTreeModel>[]).every((e) => element?.easyTreeChildren.contains(e.element) ?? false));
     assert(parent == ((element?.easyTreeOwner == element?.easyTreeParent) ? null : (element?.easyTreeParent as TestElement?)?.num));
     assert((children ?? <TestEasyTreeModel>[]).every((e) => mountSortChildren.contains(e)));

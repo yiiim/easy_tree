@@ -25,6 +25,13 @@ abstract class EasyTreeElement extends _EasyTreeElement with EasyTreeNodeMixin, 
     return _EasyTreeInheritedWidget(easyTreeElement: this, child: buildChild());
   }
 
+  @override
+  void update(covariant Widget newWidget) {
+    super.update(newWidget);
+    markNeedsBuild();
+    rebuild();
+  }
+
   Widget buildChild();
 
   @override

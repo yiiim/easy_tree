@@ -102,8 +102,10 @@ mixin EasySequenceTreeNodeMixin on EasySequenceTreeNode {
           // 向上一级
           item.element.visitAncestorElements(
             (e) {
-              item.topChildElement = item.element;
-              item.element = e;
+              if (e.depth == currentDepth - 1) {
+                item.topChildElement = item.element;
+                item.element = e;
+              }
               return false;
             },
           );
@@ -170,19 +172,6 @@ mixin EasySequenceTreeNodeMixin on EasySequenceTreeNode {
       },
     );
     assert(easySequenceTreeNodeChildren.map((e) => e.topElement).toSet().length == easySequenceTreeNodeChildren.length);
-    assert(() {
-      int? depth;
-      for (var item in easySequenceTreeNodeChildren) {
-        if (depth == null) {
-          depth = item.topElement?.depth;
-        } else {
-          if (depth != item.topElement!.depth) {
-            throw "";
-          }
-        }
-      }
-      return true;
-    }());
   }
 
   void _mountEntity(_EasyTreeNodeElementTreeEntity entity, EasySequenceTreeNode parent) {
