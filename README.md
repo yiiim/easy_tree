@@ -1,3 +1,3 @@
 # easy_tree
 
-在复杂Widget树中构建一棵特定节点的树
+Build a simple tree of a specific node in a complex Widget tree.
