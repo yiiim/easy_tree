@@ -1,7 +1,7 @@
 name: easy_tree
 description: A new Flutter plugin project.
 version: 0.0.1
-homepage:
+homepage: https://github.com/yiiim/easy_tree
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  collection: any
+  collection: ^1.16.0
   
 
 dev_dependencies:
