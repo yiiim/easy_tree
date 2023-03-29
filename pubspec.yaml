@@ -1,6 +1,6 @@
 name: easy_tree
 description: Build a simple tree of a specific node in a complex Widget tree.
-version: 0.0.1+1
+version: 0.0.1+2
 homepage: https://github.com/yiiim/easy_tree
 
 environment:

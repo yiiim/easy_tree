@@ -25,7 +25,7 @@ mixin EasyTreeElementMixin on EasyTreeElementNode, Element {
 
   @override
   @mustCallSuper
-  void rebuild() {
+  void rebuild({bool force = false}) {
     if (_firstBuild) {
       _firstBuild = false;
       _mountSelf();

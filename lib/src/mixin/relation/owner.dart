@@ -16,11 +16,11 @@ mixin EasyTreeOwnerRelation on EasyTreeOwner, EasyTreeRelation {
 
   @override
   void mountEasyTreeNode(EasyTreeNode? parent, EasyTreeNode node) {
+    super.mountEasyTreeNode(parent, node);
     for (var element in node.keys) {
       _allKeyMapNodes[element] ??= [];
       _allKeyMapNodes[element]!.add(node);
     }
-    super.mountEasyTreeNode(parent, node);
   }
 
   @override
